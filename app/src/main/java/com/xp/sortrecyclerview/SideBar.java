@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,7 +20,7 @@ public class SideBar extends View {
 			"W", "X", "Y", "Z", "#" };
 	private int choose = -1;
 	private Paint paint = new Paint();
-
+	private int textColor = ContextCompat.getColor(getContext(), R.color.common_33);
 	private TextView mTextDialog;
 
 	/**
@@ -50,7 +51,7 @@ public class SideBar extends View {
 		int singleHeight = height / b.length;// 获取每一个字母的高度
 
 		for (int i = 0; i < b.length; i++) {
-			paint.setColor(Color.rgb(33, 65, 98));
+			paint.setColor(textColor);
 			// paint.setColor(Color.WHITE);
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 			paint.setAntiAlias(true);
@@ -78,7 +79,7 @@ public class SideBar extends View {
 
 		switch (action) {
 		case MotionEvent.ACTION_UP:
-			setBackground(new ColorDrawable(0x00000000));
+//			setBackground(new ColorDrawable(0x00000000));
 			choose = -1;//
 			invalidate();
 			if (mTextDialog != null) {
@@ -87,7 +88,7 @@ public class SideBar extends View {
 			break;
 
 		default:
-			setBackgroundResource(R.drawable.sidebar_background);
+//			setBackgroundResource(R.drawable.sidebar_background);
 			if (oldChoose != c) {
 				if (c >= 0 && c < b.length) {
 					if (listener != null) {

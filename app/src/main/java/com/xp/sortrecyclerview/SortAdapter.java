@@ -28,7 +28,7 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
 
     @Override
     public SortAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.item, parent,false);
+        View view = mInflater.inflate(R.layout.filter_title_item, parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         viewHolder.tvTag = (TextView) view.findViewById(R.id.tag);
         viewHolder.tvName = (TextView) view.findViewById(R.id.name);

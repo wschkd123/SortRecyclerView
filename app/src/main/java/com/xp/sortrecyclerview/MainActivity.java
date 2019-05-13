@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private SideBar sideBar;
     private TextView dialog;
     private SortAdapter adapter;
-    private ClearEditText mClearEditText;
     LinearLayoutManager manager;
 
     private List<SortModel> SourceDateList;
@@ -68,34 +67,6 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(manager);
         adapter = new SortAdapter(this, SourceDateList);
         mRecyclerView.setAdapter(adapter);
-        //item点击事件
-        /*adapter.setOnItemClickListener(new SortAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(MainActivity.this, ((SortModel)adapter.getItem(position)).getName(),Toast.LENGTH_SHORT).show();
-            }
-        });*/
-        mClearEditText = (ClearEditText) findViewById(R.id.filter_edit);
-
-        //根据输入框输入值的改变来过滤搜索
-        mClearEditText.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //当输入框里面的值为空，更新为原来的列表，否则为过滤数据列表
-                filterData(s.toString());
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
     }
 
 
@@ -126,36 +97,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return mSortList;
 
-    }
-
-    /**
-     * 根据输入框中的值来过滤数据并更新RecyclerView
-     *
-     * @param filterStr
-     */
-    private void filterData(String filterStr) {
-        List<SortModel> filterDateList = new ArrayList<>();
-
-        if (TextUtils.isEmpty(filterStr)) {
-            filterDateList = SourceDateList;
-        } else {
-            filterDateList.clear();
-            for (SortModel sortModel : SourceDateList) {
-                String name = sortModel.getName();
-                if (name.indexOf(filterStr.toString()) != -1 ||
-                        PinyinUtils.getFirstSpell(name).startsWith(filterStr.toString())
-                        //不区分大小写
-                        || PinyinUtils.getFirstSpell(name).toLowerCase().startsWith(filterStr.toString())
-                        || PinyinUtils.getFirstSpell(name).toUpperCase().startsWith(filterStr.toString())
-                        ) {
-                    filterDateList.add(sortModel);
-                }
-            }
-        }
-
-        // 根据a-z进行排序
-        Collections.sort(filterDateList, pinyinComparator);
-        adapter.updateList(filterDateList);
     }
 
 }
